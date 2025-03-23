@@ -1,40 +1,34 @@
 import 'dart:convert';
-
-import 'package:dio/dio.dart';
+import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:tgriffit_flutter_sdk/src/models/user.dart';
 
 class MyFlutterSDK {
   final String _apiKey;
-  final Dio _dio;
 
-  MyFlutterSDK(String apiKey) : _apiKey = apiKey, _dio = Dio();
+  MyFlutterSDK(String apiKey) : _apiKey = apiKey;
 
   Future<String> _fetchMe() async {
-    // Utilisation d'un proxy en cas de problème de CORS
     final endpoint =
         await canConnectToInternet()
             ? 'https://api.azeoo.dev/v1/users/me'
             : 'http://localhost:3001/api/v1/users/me';
     try {
-      _dio.options.headers['Authorization'] = 'Bearer $_apiKey';
-      _dio.options.headers['Accept-Language'] = 'fr-FR';
-      _dio.options.headers['X-User-Id'] = '1';
-
-      final response = await _dio.get(endpoint);
+      final response = await http.get(
+        Uri.parse(endpoint),
+        headers: {
+          'Authorization': 'Bearer $_apiKey',
+          'Accept-Language': 'fr-FR',
+          'X-User-Id': '1',
+          'Content-Type': 'application/json',
+        },
+      );
 
       if (response.statusCode == 200) {
-        return response.data.toString();
+        return response.body;
       } else {
-        throw Exception('Failed to fetch: ${response.statusMessage}');
+        throw Exception('Failed to fetch: ${response.reasonPhrase}');
       }
-    } on DioExceptionType catch (e) {
-      if (e.runtimeType.hashCode == DioExceptionType.connectionError.hashCode) {
-        print('[ERROR] Network issue: $e');
-      } else {
-        print('[ERROR] DioException: $e');
-      }
-      rethrow;
     } catch (e) {
       print('[ERROR] $e');
       rethrow;
@@ -43,18 +37,8 @@ class MyFlutterSDK {
 
   Future<bool> canConnectToInternet() async {
     try {
-      final response = await _dio.get('https://www.google.com');
+      final response = await http.get(Uri.parse('https://www.google.com'));
       return response.statusCode == 200;
-    } on DioException catch (e) {
-      debugPrint('[DioException]');
-      if (e.type == DioExceptionType.connectionError) {
-        print('[ERROR] Network issue: $e');
-      } else if (e.type == DioExceptionType.unknown) {
-        print('[ERROR] CORS issue or server error: $e');
-      } else {
-        print('[ERROR] DioException: $e');
-      }
-      return false;
     } catch (e) {
       print('[ERROR] Unable to connect to the internet: $e');
       return false;
@@ -62,22 +46,19 @@ class MyFlutterSDK {
   }
 
   Future<User> getMe() async {
-    final user;
+    final User user;
 
     try {
       final response = await _fetchMe();
-      //rajoute les guillemets manquants de la reponse... Peut-être à cause du proxy ?
-     //todo: fix problème "":"" manquants
-      String fixedJson = response.replaceAllMapped(
-              RegExp(r'(\w+):\s*([^,}]+)'),
-              (match) => '"${match.group(1)}": "${match.group(2)}"'
-          );
 
-      // print(fixedJson);
       print(response);
       if (response.isNotEmpty) {
-        final Map<String, dynamic> jsonResponse = jsonDecode(fixedJson) as Map<String, dynamic>;
+        final Map<String, dynamic> jsonResponse = jsonDecode(response) as Map<String, dynamic>;
+        print(jsonResponse['id']);
+        print(jsonResponse['first_name']);
+        print(jsonResponse['last_name']);
         user = User.fromJson(jsonResponse);
+        print('[USER] $user');
       } else {
         throw FormatException('Invalid JSON response');
       }
@@ -88,3 +69,4 @@ class MyFlutterSDK {
     }
   }
 }
+// {"id":1,"first_name":"Samuel","last_name":"Verdier","info":"H, 48 - 175 cm \/ 106,6 kg - Montpellier, France","email":"samuel.verdier@gmail.com","picture":[{"url":"https:\/\/cdn-staging.azeoo.com\/users\/1\/thumbnail\/5c497ab871644.jpg","label":"thumbnail"},{"url":"https:\/\/cdn-staging.azeoo.com\/users\/1\/small\/5c497ab871644.jpg","label":"small"},{"url":"https:\/\/cdn-staging.azeoo.com\/users\/1\/large\/5c497ab871644.jpg","label":"large"}],"account_type":"premium","account_type_club":null,"country_flag":"https:\/\/flagcdn.com\/64x48\/fr.png","points":156169,"badges_count":71,"badges":[{"id":129,"name":"Fitness lover","description":"Vous avez gagn\u00e9 3 fois ce badge en vous entra\u00eenant le jour de la St Valentin.","date":"2025-02-14","count":3,"images":[{"url":"https:\/\/cdn-staging.azeoo.com\/badges\/thumbnail\/129-v2.png","label":"thumbnail"},{"url":"https:\/\/cdn-staging.azeoo.com\/badges\/small\/129-v2.png","label":"small"}]},{"id":184,"name":"Vegan Day","description":"Vous avez gagn\u00e9 4 fois ce badge en vous entra\u00eenant durant la journ\u00e9e internationale Vegan.","date":"2024-11-01","count":4,"images":[{"url":"https:\/\/cdn-staging.azeoo.com\/badges\/thumbnail\/184-v2.png","label":"thumbnail"},{"url":"https:\/\/cdn-staging.azeoo.com\/badges\/small\/184-v2.png","label":"small"}]},{"id":200,"name":"Compliment Day","description":"Vous avez gagn\u00e9 2 fois ce badge en vous entra\u00eenant durant la journ\u00e9e internationale du compliment.","date":"2024-03-01","count":2,"images":[{"url":"https:\/\/cdn-staging.azeoo.com\/badges\/thumbnail\/200-v2.png","label":"thumbnail"},{"url":"https:\/\/cdn-staging.azeoo.com\/badges\/small\/200-v2.png","label":"small"}]},{"id":172,"name":"Mardi Gras","description":"Vous avez gagn\u00e9 3 fois ce badge en vous entra\u00eenant durant Mardi Gras.","date":"2024-02-21","count":3,"images":[{"url":"https:\/\/cdn-staging.azeoo.com\/badges\/thumbnail\/172-v2.png","label":"thumbnail"},{"url":"https:\/\/cdn-staging.azeoo.com\/badges\/small\/172-v2.png","label":"small"}]},{"id":254,"name":"Blue Monday Day","description":"Vous avez gagn\u00e9 3 fois ce badge en vous entra\u00eenant durant la journ\u00e9e internationale du Blue Monday.","date":"2024-01-18","count":3,"images":[{"url":"https:\/\/cdn-staging.azeoo.com\/badges\/thumbnail\/254-v2.png","label":"thumbnail"},{"url":"https:\/\/cdn-staging.azeoo.com\/badges\/small\/254-v2.png","label":"small"}]},{"id":115,"name":"Happy birthday","description":"Vous avez gagn\u00e9 1 fois ce badge en vous entra\u00eenant le jour de votre anniversaire.","date":"2024-01-16","count":1,"images":[{"url":"https:\/\/cdn-staging.azeoo.com\/badges\/thumbnail\/115-v2.png","label":"thumbnail"},{"url":"https:\/\/cdn-staging.azeoo.com\/badges\/small\/115-v2.png","label":"small"}]},{"id":153,"name":"Black Friday","description":"Vous avez gagn\u00e9 2 fois ce badge en vous entra\u00eenant durant la journ\u00e9e du Black Friday.","date":"2023-11-24","count":2,"images":[{"url":"https:\/\/cdn-staging.azeoo.com\/badges\/thumbnail\/153-v2.png","label":"thumbnail"},{"url":"https:\/\/cdn-staging.azeoo.com\/badges\/small\/153-v2.png","label":"small"}]},{"id":149,"name":"Men's Day","description":"Vous avez gagn\u00e9 4 fois ce badge en vous entra\u00eenant durant la journ\u00e9e internationale de l'homme.","date":"2023-11-19","count":4,"images":[{"url":"https:\/\/cdn-staging.azeoo.com\/badges\/thumbnail\/149-v2.png","label":"thumbnail"},{"url":"https:\/\/cdn-staging.azeoo.com\/badges\/small\/149-v2.png","label":"small"}]}],"skills":[{"id":"21","name":"Crossfit"},{"id":"42","name":"Musculation"}],"is_following":null,"coach_attachment_state":null,"is_public_coach":false,

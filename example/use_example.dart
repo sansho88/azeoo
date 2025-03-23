@@ -7,7 +7,7 @@ void main() async {
   final sdk = MyFlutterSDK(dotenv.env['API_KEY']!);
   try {
     final me = await sdk.getMe();
-    print('User found: ${me.firstName} ${me.lastName}');
+    print('User found: ${me.id} ${me.lastName}');
   } catch (e) {
     print("Error: $e");
   }
