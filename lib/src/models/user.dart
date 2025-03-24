@@ -1,6 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
 
-
 part 'user.g.dart';
 
 @JsonSerializable(explicitToJson: true)
@@ -65,7 +64,8 @@ class User {
   final String? coachsPermission;
   final String? bodyPermission;
   final bool leaderboardDisabled;
-  final List<dynamic> subscriptions; // Mixed list of different subscription types
+  final List<dynamic>
+  subscriptions; // Mixed list of different subscription types
   final Subscription subscription;
   final List<WhiteLabel> whiteLabels;
   final bool ssoOneconciergerieEnabled;
@@ -186,20 +186,23 @@ class User {
       lastName: json['last_name'] as String,
       info: json['info'] as String,
       email: json['email'] as String,
-      picture: (json['picture'] as List<dynamic>)
-          .map((e) => AzeooImage.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      picture:
+          (json['picture'] as List<dynamic>)
+              .map((e) => AzeooImage.fromJson(e as Map<String, dynamic>))
+              .toList(),
       accountType: json['account_type'] as String,
       accountTypeClub: json['account_type_club'],
       countryFlag: json['country_flag'] as String,
       points: json['points'] as int,
       badgesCount: json['badges_count'] as int,
-      badges: (json['badges'] as List<dynamic>)
-          .map((e) => Badge.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      skills: (json['skills'] as List<dynamic>)
-          .map((e) => Skill.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      badges:
+          (json['badges'] as List<dynamic>)
+              .map((e) => Badge.fromJson(e as Map<String, dynamic>))
+              .toList(),
+      skills:
+          (json['skills'] as List<dynamic>)
+              .map((e) => Skill.fromJson(e as Map<String, dynamic>))
+              .toList(),
       isFollowing: json['is_following'] as bool?,
       coachAttachmentState: json['coach_attachment_state'],
       isPublicCoach: json['is_public_coach'] as bool,
@@ -222,17 +225,23 @@ class User {
       followersCount: json['followers_count'] as int,
       workoutsCount: json['workouts_count'] as int,
       feedsCount: json['feeds_count'] as int,
-      recentActivity: (json['recent_activity'] as List<dynamic>)
-          .map((e) => RecentActivity.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      recentActivity:
+          (json['recent_activity'] as List<dynamic>)
+              .map((e) => RecentActivity.fromJson(e as Map<String, dynamic>))
+              .toList(),
       programsCount: json['programs_count'] as int,
-      programs: (json['programs'] as List<dynamic>)
-          .map((e) => UserProgramSimplified.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      programs:
+          (json['programs'] as List<dynamic>)
+              .map(
+                (e) =>
+                    UserProgramSimplified.fromJson(e as Map<String, dynamic>),
+              )
+              .toList(),
       coach: json['coach'],
-      clubs: (json['clubs'] as List<dynamic>)
-          .map((e) => ClubSimplified.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      clubs:
+          (json['clubs'] as List<dynamic>)
+              .map((e) => ClubSimplified.fromJson(e as Map<String, dynamic>))
+              .toList(),
       coachs: json['coachs'],
       teams: json['teams'],
       quotes: json['quotes'] as String,
@@ -243,7 +252,9 @@ class User {
       contacts: Contacts.fromJson(json['contacts'] as Map<String, dynamic>),
       isEmailVerified: json['is_email_verified'] as bool,
       isSetupDone: json['is_setup_done'] as bool,
-      setupFields: SetupFields.fromJson(json['setup_fields'] as Map<String, dynamic>),
+      setupFields: SetupFields.fromJson(
+        json['setup_fields'] as Map<String, dynamic>,
+      ),
       isTest: json['is_test'] as bool,
       hasCometchatAccount: json['has_cometchat_account'] as bool,
       chatEnabled: json['chat_enabled'] as bool,
@@ -253,11 +264,15 @@ class User {
       coachsPermission: json['coachs_permission'] as String,
       bodyPermission: json['body_permission'] as String,
       leaderboardDisabled: json['leaderboard_disabled'] as bool,
-      subscriptions: (json['subscriptions'] as List<dynamic>), // Handle with care
-      subscription: Subscription.fromJson(json['subscription'] as Map<String, dynamic>),
-      whiteLabels: (json['white_labels'] as List<dynamic>)
-          .map((e) => WhiteLabel.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      subscriptions: (json['subscriptions'] as List<dynamic>),
+      // Handle with care
+      subscription: Subscription.fromJson(
+        json['subscription'] as Map<String, dynamic>,
+      ),
+      whiteLabels:
+          (json['white_labels'] as List<dynamic>)
+              .map((e) => WhiteLabel.fromJson(e as Map<String, dynamic>))
+              .toList(),
       ssoOneconciergerieEnabled: json['sso_oneconciergerie_enabled'] as bool,
       timezone: json['timezone'] as String,
       premiumLabel: json['premium_label'],
@@ -267,15 +282,17 @@ class User {
       createdAt: DateTime.parse(json['created_at'] as String),
       updatedAt: DateTime.parse(json['updated_at'] as String),
       lastActivity: DateTime.parse(json['last_activity'] as String),
-      contents: (json['contents'] as List<dynamic>)
-          .map((e) => Content.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      contents:
+          (json['contents'] as List<dynamic>)
+              .map((e) => Content.fromJson(e as Map<String, dynamic>))
+              .toList(),
       canContact: json['can_contact'] as bool,
       teamsCount: json['teams_count'] as int,
       canAccessStatsAllPeriods: json['can_access_stats_all_periods'] as bool,
       canSetFavorite: json['can_set_favorite'] as bool,
       canFilterByEquipment: json['can_filter_by_equipment'] as bool,
-      canAutomaticallyUpdateNextTraining: json['can_automatically_update_next_training'] as bool,
+      canAutomaticallyUpdateNextTraining:
+          json['can_automatically_update_next_training'] as bool,
       canCreateExercise: json['can_create_exercise'] as bool,
       canCreateFreeTraining: json['can_create_free_training'] as bool,
       canLogActivity: json['can_log_activity'] as bool,
@@ -285,115 +302,22 @@ class User {
     );
   }
 
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'first_name': firstName,
-      'last_name': lastName,
-      'info': info,
-      'email': email,
-      'picture': picture.map((e) => e.toJson()).toList(),
-      'account_type': accountType,
-      'account_type_club': accountTypeClub,
-      'country_flag': countryFlag,
-      'points': points,
-      'badges_count': badgesCount,
-      'badges': badges.map((e) => e.toJson()).toList(),
-      'skills': skills.map((e) => e.toJson()).toList(),
-      'is_following': isFollowing,
-      'coach_attachment_state': coachAttachmentState,
-      'is_public_coach': isPublicCoach,
-      'birthday': birthday.toJson(),
-      'gender': gender,
-      'bmr': bmr,
-      'height': height,
-      'formatted_height': formattedHeight,
-      'weight': weight,
-      'formatted_weight': formattedWeight,
-      'weight_goal': weightGoal,
-      'formatted_weight_goal': formattedWeightGoal,
-      'level': level,
-      'goal': goal.toJson(),
-      'city': city.toJson(),
-      'country_code': countryCode,
-      'language': language,
-      'location': location.toJson(),
-      'is_follower': isFollower,
-      'followers_count': followersCount,
-      'workouts_count': workoutsCount,
-      'feeds_count': feedsCount,
-      'recent_activity': recentActivity.map((e) => e.toJson()).toList(),
-      'programs_count': programsCount,
-      'programs': programs.map((e) => e.toJson()).toList(),
-      'coach': coach,
-      'clubs': clubs.map((e) => e.toJson()).toList(),
-      'coachs': coachs,
-      'teams': teams,
-      'quotes': quotes,
-      'about': about,
-      'about_diet': aboutDiet,
-      'about_training': aboutTraining,
-      'about_training_schedule': aboutTrainingSchedule,
-      'contacts': contacts.toJson(),
-      'is_email_verified': isEmailVerified,
-      'is_setup_done': isSetupDone,
-      'setup_fields': setupFields.toJson(),
-      'is_test': isTest,
-      'has_cometchat_account': hasCometchatAccount,
-      'chat_enabled': chatEnabled,
-      'training_permission': trainingPermission,
-      'nutrition_permission': nutritionPermission,
-      'clubs_permission': clubsPermission,
-      'coachs_permission': coachsPermission,
-      'body_permission': bodyPermission,
-      'leaderboard_disabled': leaderboardDisabled,
-      'subscriptions': subscriptions,
-      'subscription': subscription.toJson(),
-      'white_labels': whiteLabels.map((e) => e.toJson()).toList(),
-      'sso_oneconciergerie_enabled': ssoOneconciergerieEnabled,
-      'timezone': timezone,
-      'premium_label': premiumLabel,
-      'disabled_premium': disabledPremium,
-      'diago_link': diagoLink,
-      'invoices_link': invoicesLink,
-      'created_at': createdAt.toIso8601String(),
-      'updated_at': updatedAt.toIso8601String(),
-      'last_activity': lastActivity.toIso8601String(),
-      'contents': contents.map((e) => e.toJson()).toList(),
-      'can_contact': canContact,
-      'teams_count': teamsCount,
-      'can_access_stats_all_periods': canAccessStatsAllPeriods,
-      'can_set_favorite': canSetFavorite,
-      'can_filter_by_equipment': canFilterByEquipment,
-      'can_automatically_update_next_training': canAutomaticallyUpdateNextTraining,
-      'can_create_exercise': canCreateExercise,
-      'can_create_free_training': canCreateFreeTraining,
-      'can_log_activity': canLogActivity,
-      'can_show_customers': canShowCustomers,
-      'can_delete_account': canDeleteAccount,
-      'subscriptions_disabled': subscriptionsDisabled,
-    };
-  }
+  Map<String, dynamic> toJson() => _$UserToJson(this);
 }
 
+@JsonSerializable()
 class AzeooImage {
   final String? url;
   final String? label;
 
   AzeooImage({this.url, this.label});
 
-  factory AzeooImage.fromJson(Map<String, dynamic> json) {
-    return AzeooImage(url: json['url'] as String?, label: json['label'] as String?);
-  }
+  factory AzeooImage.fromJson(Map<String, dynamic> json) => _$AzeooImageFromJson(json);
 
-  Map<String, dynamic> toJson() {
-    return {
-      'url': url,
-      'label': label,
-    };
-  }
+  Map<String, dynamic> toJson() => _$AzeooImageToJson(this);
 }
 
+@JsonSerializable()
 class Badge {
   final int id;
   final String? name;
@@ -407,142 +331,88 @@ class Badge {
     this.name,
     this.description,
     this.date,
-    required  this.count,
+    required this.count,
     required this.images,
   });
 
-  factory Badge.fromJson(Map<String, dynamic> json) {
-    return Badge(
-      id: json['id'] as int,
-      name: json['name'] as String,
-      description: json['description'] as String,
-      date: json['date'] as String,
-      count: json['count'] as int,
-      images: (json['images'] as List<dynamic>)
-          .map((e) => AzeooImage.fromJson(e as Map<String, dynamic>))
-          .toList(),
-    );
-  }
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'name': name,
-      'description': description,
-      'date': date,
-      'count': count,
-      'images': images.map((e) => e.toJson()).toList(),
-    };
-  }
+  factory Badge.fromJson(Map<String, dynamic> json) => _$BadgeFromJson(json);
+
+  Map<String, dynamic> toJson() => _$BadgeToJson(this);
 }
 
+@JsonSerializable()
 class Skill {
   final String? id;
   final String? name;
 
   Skill({this.id, this.name});
 
-  factory Skill.fromJson(Map<String, dynamic> json) {
-    return Skill(id: json['id'] as String, name: json['name'] as String);
-  }
+  factory Skill.fromJson(Map<String, dynamic> json) => _$SkillFromJson(json);
 
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'name': name,
-    };
-  }
+  Map<String, dynamic> toJson() => _$SkillToJson(this);
 }
 
+@JsonSerializable()
 class Birthday {
   final String? value;
   final String? permission;
 
   Birthday({this.value, this.permission});
 
-  factory Birthday.fromJson(Map<String, dynamic> json) {
-    return Birthday(value: json['value'] as String, permission: json['permission'] as String);
-  }
+  factory Birthday.fromJson(Map<String, dynamic> json) => _$BirthdayFromJson(json);
 
-  Map<String, dynamic> toJson() {
-    return {
-      'value': value,
-      'permission': permission,
-    };
-  }
+  Map<String, dynamic> toJson() => _$BirthdayToJson(this);
 }
 
+@JsonSerializable()
 class UserGoal {
   final String? value;
   final String? permission;
 
   UserGoal({this.value, this.permission});
 
-  factory UserGoal.fromJson(Map<String, dynamic> json) {
-    return UserGoal(value: json['value'] as String, permission: json['permission'] as String);
-  }
+  factory UserGoal.fromJson(Map<String, dynamic> json) => _$UserGoalFromJson(json);
 
-  Map<String, dynamic> toJson() {
-    return {
-      'value': value,
-      'permission': permission,
-    };
-  }
+  Map<String, dynamic> toJson() => _$UserGoalToJson(this);
 }
 
+@JsonSerializable()
 class UserCity {
   final String? value;
   final String? permission;
 
   UserCity({this.value, this.permission});
 
-  factory UserCity.fromJson(Map<String, dynamic> json) {
-    return UserCity(value: json['value'] as String, permission: json['permission'] as String);
-  }
+  factory UserCity.fromJson(Map<String, dynamic> json) => _$UserCityFromJson(json);
 
-  Map<String, dynamic> toJson() {
-    return {
-      'value': value,
-      'permission': permission,
-    };
-  }
+  Map<String, dynamic> toJson() => _$UserCityToJson(this);
 }
 
+@JsonSerializable()
 class UserLocation {
   final double lng;
   final double lat;
 
   UserLocation({required this.lng, required this.lat});
 
-  factory UserLocation.fromJson(Map<String, dynamic> json) {
-    return UserLocation(lng: (json['lng'] as num).toDouble(), lat: (json['lat'] as num).toDouble());
-  }
+  factory UserLocation.fromJson(Map<String, dynamic> json) => _$UserLocationFromJson(json);
 
-  Map<String, dynamic> toJson() {
-    return {
-      'lng': lng,
-      'lat': lat,
-    };
-  }
+  Map<String, dynamic> toJson() => _$UserLocationToJson(this);
 }
 
+@JsonSerializable()
 class RecentActivity {
   final String? date;
   final int duration;
 
   RecentActivity({this.date, required this.duration});
 
-  factory RecentActivity.fromJson(Map<String, dynamic> json) {
-   return RecentActivity(date: json['date'] as String, duration: json['duration'] as int);
-  }
+  factory RecentActivity.fromJson(Map<String, dynamic> json) => _$RecentActivityFromJson(json);
 
-  Map<String, dynamic> toJson() {
-    return {
-      'date': date,
-      'duration': duration,
-    };
-  }
+  Map<String, dynamic> toJson() => _$RecentActivityToJson(this);
 }
 
+@JsonSerializable()
 class UserProgramSimplified {
   final int id;
   final String? object;
@@ -570,39 +440,13 @@ class UserProgramSimplified {
     this.updatedAt,
   });
 
-  factory UserProgramSimplified.fromJson(Map<String, dynamic> json) {
-    return UserProgramSimplified(
-      id: json['id'] as int,
-      object: json['object'] as String,
-      program: json['program'] != '' ? Program.fromJson(json['program'] as Map<String, dynamic>) : null,
-      version: json['version'] != '' ? ProgramVersion.fromJson(json['version'] as Map<String, dynamic>) : null,
-      startedAt: json['started_at'] as String,
-      endedAt: json['ended_at'] as String?,
-      state: json['state'] as String,
-      achievement: json['achievement'] as int,
-      achievementDays: json['achievement_days'] as String,
-      createdAt: json['created_at'] as String,
-      updatedAt: json['updated_at'] as String,
-    );
-  }
+  factory UserProgramSimplified.fromJson(Map<String, dynamic> json) =>
+      _$UserProgramSimplifiedFromJson(json);
 
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'object': object,
-      'program': program?.toJson(),
-      'version': version?.toJson(),
-      'started_at': startedAt,
-      'ended_at': endedAt,
-      'state': state,
-      'achievement': achievement,
-      'achievement_days': achievementDays,
-      'created_at': createdAt,
-      'updated_at': updatedAt,
-    };
-  }
+  Map<String, dynamic> toJson() => _$UserProgramSimplifiedToJson(this);
 }
 
+@JsonSerializable()
 class Program {
   final int id;
   final String? name;
@@ -630,15 +474,15 @@ class Program {
     this.caption,
     this.isDeleted,
     this.isFavorite,
-    required  this.canFavorite,
+    required this.canFavorite,
     this.url,
     this.purchase,
     this.purchaseV2,
-    required  this.isPremium,
-    required  this.needSubscription,
+    required this.isPremium,
+    required this.needSubscription,
     this.subscriptionsInfo,
     this.totalDays,
-    required  this.totalWeeks,
+    required this.totalWeeks,
     this.author,
     this.type,
     this.images,
@@ -664,39 +508,19 @@ class Program {
       totalWeeks: json['total_weeks'] as int,
       author: ProgramAuthor.fromJson(json['author'] as Map<String, dynamic>),
       type: json['type'] as String?,
-      images: (json['images'] as List<dynamic>)
-          .map((e) => AzeooImage.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      images:
+          (json['images'] as List<dynamic>)
+              .map((e) => AzeooImage.fromJson(e as Map<String, dynamic>))
+              .toList(),
       nameFr: json['name_fr'] as String?,
       captionFr: json['caption_fr'] as String?,
     );
   }
 
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'name': name,
-      'caption': caption,
-      'is_deleted': isDeleted,
-      'is_favorite': isFavorite,
-      'can_favorite': canFavorite,
-      'url': url,
-      'purchase': purchase,
-      'purchase_v2': purchaseV2,
-      'is_premium': isPremium,
-      'need_subscription': needSubscription,
-      'subscriptions_info': subscriptionsInfo,
-      'total_days': totalDays,
-      'total_weeks': totalWeeks,
-      'author': author?.toJson(),
-      'type': type,
-      'images': images?.map((e) => e.toJson()).toList(),
-      'name_fr': nameFr,
-      'caption_fr': captionFr,
-    };
-  }
+  Map<String, dynamic> toJson() => _$ProgramToJson(this);
 }
 
+@JsonSerializable()
 class ProgramAuthor {
   final int id;
   final String? name;
@@ -713,54 +537,27 @@ class ProgramAuthor {
     this.isManager,
     this.isCoach,
     this.photos,
-    this.type
+    this.type,
   });
 
-  factory ProgramAuthor.fromJson(Map<String, dynamic> json) {
-    return ProgramAuthor(
-        id: json['id'] as int,
-        name: json['name'] as String,
-        isGhost: json['is_ghost'] as bool,
-        isManager: json['is_manager'] as bool,
-        isCoach: json['is_coach'] as bool,
-        photos: (json['photos'] as List<dynamic>)
-            .map((e) => AzeooImage.fromJson(e as Map<String, dynamic>))
-            .toList(),
-        type: json['type'] as String?
-    );
-  }
+  factory ProgramAuthor.fromJson(Map<String, dynamic> json) => _$ProgramAuthorFromJson(json);
 
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'name': name,
-      'is_ghost': isGhost,
-      'is_manager': isManager,
-      'is_coach': isCoach,
-      'photos': photos?.map((e) => e.toJson()).toList(),
-      'type': type,
-    };
-  }
+  Map<String, dynamic> toJson() => _$ProgramAuthorToJson(this);
 }
 
+@JsonSerializable()
 class ProgramVersion {
   final int id;
   final String? name;
 
   ProgramVersion({required this.id, this.name});
 
-  factory ProgramVersion.fromJson(Map<String, dynamic> json) {
-    return ProgramVersion(id: json['id'] as int, name: json['name'] as String);
-  }
+  factory ProgramVersion.fromJson(Map<String, dynamic> json) => _$ProgramVersionFromJson(json);
 
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'name': name,
-    };
-  }
+  Map<String, dynamic> toJson() => _$ProgramVersionToJson(this);
 }
 
+@JsonSerializable()
 class ClubSimplified {
   final int id;
   final String? object;
@@ -789,20 +586,20 @@ class ClubSimplified {
   final bool lesmillsEnabled;
   final bool chatEnabled;
   final int? maxAthlete;
-  final bool? bookingEnabled;
+  final bool bookingEnabled;
   final int? bookingsCount;
-  final bool? diagoLinkEnabled;
-  final bool? invoicesLinkEnabled;
-  final bool? externalProductsEnabled;
-  final bool? isGhost;
+  final bool diagoLinkEnabled;
+  final bool invoicesLinkEnabled;
+  final bool externalProductsEnabled;
+  final bool isGhost;
   final dynamic whiteLabel;
-  final bool? stripeEnabled;
-  final bool? shopifyEnabled;
-  final bool? nutritionPlanAdditionnalDataEnabled;
+  final bool stripeEnabled;
+  final bool shopifyEnabled;
+  final bool nutritionPlanAdditionnalDataEnabled;
   final String? timezone;
-  final bool? isMember;
-  final bool? isManager;
-  final bool? isCoach;
+  final bool isMember;
+  final bool isManager;
+  final bool isCoach;
   final String? type;
   final String? accountType;
   final List<AzeooImage> photos;
@@ -858,111 +655,63 @@ class ClubSimplified {
     this.coachs,
   });
 
-  factory ClubSimplified.fromJson(Map<String, dynamic> json) {
-    return ClubSimplified(
-      id: json['id'] as int,
-      object: json['object'] as String?,
-      parentId: json['parent_id'],
-      memberId: json['member_id'],
-      hasMemberId: json['has_member_id'] as bool,
-      name: json['name'] as String?,
-      shortName: json['short_name'],
-      url: json['url'] as String?,
-      city: json['city'],
-      countryCode: json['country_code'] as String?,
-      countryFlag: json['country_flag'] as String?,
-      formattedAddress: json['formatted_address'],
-      distance: json['distance'],
-      membershipState: json['membership_state'] as String?,
-      connectorType: json['connector_type'],
-      historyEnabled: json['history_enabled'] as bool,
-      connector: json['connector'],
-      qrcodeEnabled: json['qrcode_enabled'] as bool,
-      qrcodeType: json['qrcode_type'],
-      qrcodeUrl: json['qrcode_url'],
-      booking: json['booking'],
-      bookingUrl: json['booking_url'],
-      hasVideoClasses: json['has_video_classes'] as bool,
-      zfitnessEnabled: json['zfitness_enabled'] as bool,
-      lesmillsEnabled: json['lesmills_enabled'] as bool,
-      chatEnabled: json['chat_enabled'] as bool,
-      maxAthlete: json['max_athlete'] as int?,
-      bookingEnabled: json['booking_enabled'] as bool,
-      bookingsCount: json['bookings_count'] as int?,
-      diagoLinkEnabled: json['diago_link_enabled'] as bool,
-      invoicesLinkEnabled: json['invoices_link_enabled'] as bool?,
-      externalProductsEnabled: json['external_products_enabled'] as bool?,
-      isGhost: json['is_ghost'] as bool?,
-      whiteLabel: json['white_label'],
-      stripeEnabled: json['stripe_enabled'] as bool,
-      shopifyEnabled: json['shopify_enabled'] as bool?,
-      nutritionPlanAdditionnalDataEnabled: json['nutrition_plan_additionnal_data_enabled'] as bool?,
-      timezone: json['timezone'] as String?,
-      isMember: json['is_member'] as bool?,
-      isManager: json['is_manager'] as bool?,
-      isCoach: json['is_coach'] as bool?,
-      type: json['type'] as String?,
-      accountType: json['account_type'] as String?,
-      photos: (json['photos'] as List<dynamic>)
-          .map((e) => AzeooImage.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      subscriptions: (json['subscriptions'] as List<dynamic>),
-      coachs: json['coachs'],
-    );
-  }
+  factory ClubSimplified.fromJson(Map<String, dynamic> json) => ClubSimplified(
+    id: json['id'] as int,
+    object: json['object'] as String?,
+    parentId: json['parent_id'],
+    memberId: json['member_id'],
+    hasMemberId: json['has_member_id'] as bool,
+    name: json['name'] as String?,
+    shortName: json['short_name'],
+    url: json['url'] as String?,
+    city: json['city'],
+    countryCode: json['country_code'] as String?,
+    countryFlag: json['country_flag'] as String?,
+    formattedAddress: json['formatted_address'],
+    distance: json['distance'],
+    membershipState: json['membership_state'] as String?,
+    connectorType: json['connector_type'],
+    historyEnabled: json['history_enabled'] as bool,
+    connector: json['connector'],
+    qrcodeEnabled: json['qrcode_enabled'] as bool,
+    qrcodeType: json['qrcode_type'],
+    qrcodeUrl: json['qrcode_url'],
+    booking: json['booking'],
+    bookingUrl: json['booking_url'],
+    hasVideoClasses: json['has_video_classes'] as bool,
+    zfitnessEnabled: json['zfitness_enabled'] as bool,
+    lesmillsEnabled: json['lesmills_enabled'] as bool,
+    chatEnabled: json['chat_enabled'] as bool,
+    maxAthlete: json['max_athlete'] as int?,
+    bookingEnabled: json['booking_enabled'] as bool,
+    bookingsCount: json['bookings_count'] as int?,
+    diagoLinkEnabled: json['diago_link_enabled'] as bool,
+    invoicesLinkEnabled: json['invoices_link_enabled'] as bool,
+    externalProductsEnabled: json['external_products_enabled'] as bool,
+    isGhost: json['is_ghost'] as bool,
+    whiteLabel: json['white_label'],
+    stripeEnabled: json['stripe_enabled'] as bool,
+    shopifyEnabled: json['shopify_enabled'] as bool,
+    nutritionPlanAdditionnalDataEnabled:
+        json['nutrition_plan_additionnal_data_enabled'] as bool,
+    timezone: json['timezone'] as String?,
+    isMember: json['is_member'] as bool,
+    isManager: json['is_manager'] as bool,
+    isCoach: json['is_coach'] as bool,
+    type: json['type'] as String?,
+    accountType: json['account_type'] as String?,
+    photos:
+        (json['photos'] as List<dynamic>)
+            .map((e) => AzeooImage.fromJson(e as Map<String, dynamic>))
+            .toList(),
+    subscriptions: (json['subscriptions'] as List<dynamic>),
+    coachs: json['coachs'],
+  );
 
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'object': object,
-      'parent_id': parentId,
-      'member_id': memberId,
-      'has_member_id': hasMemberId,
-      'name': name,
-      'short_name': shortName,
-      'url': url,
-      'city': city,
-      'country_code': countryCode,
-      'country_flag': countryFlag,
-      'formatted_address': formattedAddress,
-      'distance': distance,
-      'membership_state': membershipState,
-      'connector_type': connectorType,
-      'history_enabled': historyEnabled,
-      'connector': connector,
-      'qrcode_enabled': qrcodeEnabled,
-      'qrcode_type': qrcodeType,
-      'qrcode_url': qrcodeUrl,
-      'booking': booking,
-      'booking_url': bookingUrl,
-      'has_video_classes': hasVideoClasses,
-      'zfitness_enabled': zfitnessEnabled,
-      'lesmills_enabled': lesmillsEnabled,
-      'chat_enabled': chatEnabled,
-      'max_athlete': maxAthlete,
-      'booking_enabled': bookingEnabled,
-      'bookings_count': bookingsCount,
-      'diago_link_enabled': diagoLinkEnabled,
-      'invoices_link_enabled': invoicesLinkEnabled,
-      'external_products_enabled': externalProductsEnabled,
-      'is_ghost': isGhost,
-      'white_label': whiteLabel,
-      'stripe_enabled': stripeEnabled,
-      'shopify_enabled': shopifyEnabled,
-      'nutrition_plan_additionnal_data_enabled': nutritionPlanAdditionnalDataEnabled,
-      'timezone': timezone,
-      'is_member': isMember,
-      'is_manager': isManager,
-      'is_coach': isCoach,
-      'type': type,
-      'account_type': accountType,
-      'photos': photos.map((e) => e.toJson()).toList(),
-      'subscriptions': subscriptions,
-      'coachs': coachs,
-    };
-  }
+  Map<String, dynamic> toJson() => _$ClubSimplifiedToJson(this);
 }
 
+@JsonSerializable()
 class Contacts {
   final dynamic twitter;
   final dynamic facebook;
@@ -988,37 +737,13 @@ class Contacts {
     this.phone,
   });
 
-  factory Contacts.fromJson(Map<String, dynamic> json) {
-    return Contacts(
-      twitter: json['twitter'],
-      facebook: json['facebook'],
-      instagram: json['instagram'],
-      pinterest: json['pinterest'],
-      tiktok: json['tiktok'],
-      snapchat: json['snapchat'],
-      youtube: json['youtube'],
-      website: json['website'],
-      email: json['email'],
-      phone: json['phone'],
-    );
-  }
+  factory Contacts.fromJson(Map<String, dynamic> json) =>
+      _$ContactsFromJson(json);
 
-  Map<String, dynamic> toJson() {
-    return {
-      'twitter': twitter,
-      'facebook': facebook,
-      'instagram': instagram,
-      'pinterest': pinterest,
-      'tiktok': tiktok,
-      'snapchat': snapchat,
-      'youtube': youtube,
-      'website': website,
-      'email': email,
-      'phone': phone,
-    };
-  }
+  Map<String, dynamic> toJson() => _$ContactsToJson(this);
 }
 
+@JsonSerializable()
 class SetupFields {
   final bool? password;
   final bool? clubId;
@@ -1036,29 +761,13 @@ class SetupFields {
     this.goal,
   });
 
-  factory SetupFields.fromJson(Map<String, dynamic> json) {
-    return SetupFields(
-      password: json['password'] as bool,
-      clubId: json['club_id'] as bool,
-      birthday: json['birthday'] as bool,
-      gender: json['gender'] as bool,
-      level: json['level'] as bool,
-      goal: json['goal'] as bool,
-    );
-  }
+  factory SetupFields.fromJson(Map<String, dynamic> json) =>
+      _$SetupFieldsFromJson(json);
 
-  Map<String, dynamic> toJson() {
-    return {
-      'password': password,
-      'club_id': clubId,
-      'birthday': birthday,
-      'gender': gender,
-      'level': level,
-      'goal': goal,
-    };
-  }
+  Map<String, dynamic> toJson() => _$SetupFieldsToJson(this);
 }
 
+@JsonSerializable()
 class Subscription {
   final String? name;
   final String? sku;
@@ -1070,6 +779,7 @@ class Subscription {
   final String? canceledAt;
   final String? endedAt;
   final bool? isTrial;
+
   // Other common fields can be added here
 
   Subscription({
@@ -1082,58 +792,29 @@ class Subscription {
     this.startedAt,
     this.canceledAt,
     this.endedAt,
-    this.isTrial
+    this.isTrial,
   });
 
-  factory Subscription.fromJson(Map<String, dynamic> json) {
-    return Subscription(
-        name: json['name'] as String,
-        sku: json['sku'] as String,
-        canCancel: json['can_cancel'] as bool? ?? false, // Handle null
-        type: json['type'] as String?,
-        status: json['status'] as int?,
-        userId: json['user_id'] as int?,
-        startedAt: json['started_at'] as String?,
-        canceledAt: json['canceled_at'] as String?,
-        endedAt: json['ended_at'] as String?,
-        isTrial: json['is_trial'] as bool?
-    );
-  }
+  factory Subscription.fromJson(Map<String, dynamic> json) =>
+      _$SubscriptionFromJson(json);
 
-  Map<String, dynamic> toJson() {
-    return {
-      'name': name,
-      'sku': sku,
-      'can_cancel': canCancel,
-      'type': type,
-      'status': status,
-      'user_id': userId,
-      'started_at': startedAt,
-      'canceled_at': canceledAt,
-      'ended_at': endedAt,
-      'is_trial': isTrial,
-    };
-  }
+  Map<String, dynamic> toJson() => _$SubscriptionToJson(this);
 }
 
+@JsonSerializable()
 class WhiteLabel {
   final int id;
   final String? key;
 
   WhiteLabel({required this.id, this.key});
 
-  factory WhiteLabel.fromJson(Map<String, dynamic> json) {
-    return WhiteLabel(id: json['id'] as int, key: json['key'] as String);
-  }
+  factory WhiteLabel.fromJson(Map<String, dynamic> json) =>
+      _$WhiteLabelFromJson(json);
 
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'key': key,
-    };
-  }
+  Map<String, dynamic> toJson() => _$WhiteLabelToJson(this);
 }
 
+@JsonSerializable()
 class Content {
   final String? name;
   final dynamic caption;
@@ -1141,36 +822,15 @@ class Content {
   final String? type;
   final List<dynamic>? items; // Mixed list
 
-  Content({
-    this.name,
-    this.caption,
-    this.url,
-    this.type,
-    this.items,
-  });
+  Content({this.name, this.caption, this.url, this.type, this.items});
 
-  factory Content.fromJson(Map<String, dynamic> json) {
-    return Content(
-      name: json['name'] as String,
-      caption: json['caption'],
-      url: json['url'] as String,
-      type: json['type'] as String,
-      items: json['items'] as List<dynamic>, // Handle with care
-    );
-  }
+  factory Content.fromJson(Map<String, dynamic> json) =>
+      _$ContentFromJson(json);
 
-  Map<String, dynamic> toJson() {
-    return {
-      'name': name,
-      'caption': caption,
-      'url': url,
-      'type': type,
-      'items': items,
-    };
-  }
+  Map<String, dynamic> toJson() => _$ContentToJson(this);
 }
 
-// User Nutrition Plan Simplified and related
+@JsonSerializable()
 class UserNutritionPlanSimplified {
   final int id;
   final String? object;
@@ -1194,35 +854,13 @@ class UserNutritionPlanSimplified {
     this.updatedAt,
   });
 
-  factory UserNutritionPlanSimplified.fromJson(Map<String, dynamic> json) {
-    return UserNutritionPlanSimplified(
-      id: json['id'] as int,
-      object: json['object'] as String,
-      url: json['url'] as String,
-      nutritionPlan: NutritionPlan.fromJson(json['nutrition_plan'] as Map<String, dynamic>),
-      startedAt: json['started_at'] as String,
-      endedAt: json['ended_at'] as String,
-      state: json['state'] as String,
-      createdAt: json['created_at'] as String,
-      updatedAt: json['updated_at'] as String?,
-    );
-  }
+  factory UserNutritionPlanSimplified.fromJson(Map<String, dynamic> json) =>
+      _$UserNutritionPlanSimplifiedFromJson(json);
 
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'object': object,
-      'url': url,
-      'nutrition_plan': nutritionPlan?.toJson(),
-      'started_at': startedAt,
-      'ended_at': endedAt,
-      'state': state,
-      'created_at': createdAt,
-      'updated_at': updatedAt,
-    };
-  }
+  Map<String, dynamic> toJson() => _$UserNutritionPlanSimplifiedToJson(this);
 }
 
+@JsonSerializable()
 class NutritionPlan {
   final int id;
   final String? name;
@@ -1254,45 +892,13 @@ class NutritionPlan {
     this.images,
   });
 
-  factory NutritionPlan.fromJson(Map<String, dynamic> json) {
-    return NutritionPlan(
-      id: json['id'] as int,
-      name: json['name'] as String,
-      isFavorite: json['is_favorite'],
-      canFavorite: json['can_favorite'] as bool,
-      url: json['url'] as String,
-      purchaseV2: json['purchase_v2'],
-      isPremium: json['is_premium'] as bool,
-      needSubscription: json['need_subscription'] as bool,
-      subscriptionsInfo: json['subscriptions_info'],
-      totalDays: json['total_days'],
-      totalWeeks: json['total_weeks'] as int,
-      author: ProgramAuthor.fromJson(json['author'] as Map<String, dynamic>),
-      images: (json['images'] as List<dynamic>)
-          .map((e) => AzeooImage.fromJson(e as Map<String, dynamic>))
-          .toList(),
-    );
-  }
+  factory NutritionPlan.fromJson(Map<String, dynamic> json) =>
+      _$NutritionPlanFromJson(json);
 
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'name': name,
-      'is_favorite': isFavorite,
-      'can_favorite': canFavorite,
-      'url': url,
-      'purchase_v2': purchaseV2,
-      'is_premium': isPremium,
-      'need_subscription': needSubscription,
-      'subscriptions_info': subscriptionsInfo,
-      'total_days': totalDays,
-      'total_weeks': totalWeeks,
-      'author': author?.toJson(),
-      'images': images?.map((e) => e.toJson()).toList(),
-    };
-  }
+  Map<String, dynamic> toJson() => _$NutritionPlanToJson(this);
 }
 
+@JsonSerializable()
 class FormSimplified {
   final int id;
   final String? share;
@@ -1330,49 +936,13 @@ class FormSimplified {
     this.userNutritionPlan,
   });
 
-  factory FormSimplified.fromJson(Map<String, dynamic> json) {
-    return FormSimplified(
-      id: json['id'] as int,
-      share: json['share'] as String,
-      url: json['url'] as String,
-      name: json['name'] as String,
-      images: json['images'],
-      author: ProgramAuthor.fromJson(json['author'] as Map<String, dynamic>),
-      coach: Coach.fromJson(json['coach'] as Map<String, dynamic>),
-      state: json['state'] as String,
-      stepsCount: json['steps_count'] as int,
-      date: json['date'],
-      responseDate: json['response_date'],
-      createdAt: json['created_at'] as String,
-      trainingId: json['training_id'],
-      nutritionPlan: json['nutrition_plan'],
-      userProgram: json['user_program'],
-      userNutritionPlan: json['user_nutrition_plan'],
-    );
-  }
+  factory FormSimplified.fromJson(Map<String, dynamic> json) =>
+      _$FormSimplifiedFromJson(json);
 
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'share': share,
-      'url': url,
-      'name': name,
-      'images': images,
-      'author': author?.toJson(),
-      'coach': coach?.toJson(),
-      'state': state,
-      'steps_count': stepsCount,
-      'date': date,
-      'response_date': responseDate,
-      'created_at': createdAt,
-      'training_id': trainingId,
-      'nutrition_plan': nutritionPlan,
-      'user_program': userProgram,
-      'user_nutrition_plan': userNutritionPlan,
-    };
-  }
+  Map<String, dynamic> toJson() => _$FormSimplifiedToJson(this);
 }
 
+@JsonSerializable()
 class Coach {
   final int id;
   final String? firstName;
@@ -1401,9 +971,10 @@ class Coach {
       id: json['id'] as int,
       firstName: json['first_name'] as String,
       lastName: json['last_name'] as String,
-      picture: (json['picture'] as List<dynamic>)
-          .map((e) => AzeooImage.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      picture:
+          (json['picture'] as List<dynamic>)
+              .map((e) => AzeooImage.fromJson(e as Map<String, dynamic>))
+              .toList(),
       accountType: json['account_type'] as String,
       isFollowing: json['is_following'] as bool,
       coachAttachmentState: json['coach_attachment_state'],
@@ -1412,18 +983,5 @@ class Coach {
     );
   }
 
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'first_name': firstName,
-      'last_name': lastName,
-      'picture': picture?.map((e) => e.toJson()).toList(),
-      'account_type': accountType,
-      'is_following': isFollowing,
-      'coach_attachment_state': coachAttachmentState,
-      'gender': gender,
-      'type': type,
-    };
-  }
+  Map<String, dynamic> toJson() => _$CoachToJson(this);
 }
-
