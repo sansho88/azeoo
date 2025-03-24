@@ -1,3 +1,9 @@
+import 'package:json_annotation/json_annotation.dart';
+
+
+part 'user.g.dart';
+
+@JsonSerializable(explicitToJson: true)
 class User {
   final int id;
   final String? firstName;
@@ -278,6 +284,96 @@ class User {
       subscriptionsDisabled: json['subscriptions_disabled'] as bool,
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'first_name': firstName,
+      'last_name': lastName,
+      'info': info,
+      'email': email,
+      'picture': picture.map((e) => e.toJson()).toList(),
+      'account_type': accountType,
+      'account_type_club': accountTypeClub,
+      'country_flag': countryFlag,
+      'points': points,
+      'badges_count': badgesCount,
+      'badges': badges.map((e) => e.toJson()).toList(),
+      'skills': skills.map((e) => e.toJson()).toList(),
+      'is_following': isFollowing,
+      'coach_attachment_state': coachAttachmentState,
+      'is_public_coach': isPublicCoach,
+      'birthday': birthday.toJson(),
+      'gender': gender,
+      'bmr': bmr,
+      'height': height,
+      'formatted_height': formattedHeight,
+      'weight': weight,
+      'formatted_weight': formattedWeight,
+      'weight_goal': weightGoal,
+      'formatted_weight_goal': formattedWeightGoal,
+      'level': level,
+      'goal': goal.toJson(),
+      'city': city.toJson(),
+      'country_code': countryCode,
+      'language': language,
+      'location': location.toJson(),
+      'is_follower': isFollower,
+      'followers_count': followersCount,
+      'workouts_count': workoutsCount,
+      'feeds_count': feedsCount,
+      'recent_activity': recentActivity.map((e) => e.toJson()).toList(),
+      'programs_count': programsCount,
+      'programs': programs.map((e) => e.toJson()).toList(),
+      'coach': coach,
+      'clubs': clubs.map((e) => e.toJson()).toList(),
+      'coachs': coachs,
+      'teams': teams,
+      'quotes': quotes,
+      'about': about,
+      'about_diet': aboutDiet,
+      'about_training': aboutTraining,
+      'about_training_schedule': aboutTrainingSchedule,
+      'contacts': contacts.toJson(),
+      'is_email_verified': isEmailVerified,
+      'is_setup_done': isSetupDone,
+      'setup_fields': setupFields.toJson(),
+      'is_test': isTest,
+      'has_cometchat_account': hasCometchatAccount,
+      'chat_enabled': chatEnabled,
+      'training_permission': trainingPermission,
+      'nutrition_permission': nutritionPermission,
+      'clubs_permission': clubsPermission,
+      'coachs_permission': coachsPermission,
+      'body_permission': bodyPermission,
+      'leaderboard_disabled': leaderboardDisabled,
+      'subscriptions': subscriptions,
+      'subscription': subscription.toJson(),
+      'white_labels': whiteLabels.map((e) => e.toJson()).toList(),
+      'sso_oneconciergerie_enabled': ssoOneconciergerieEnabled,
+      'timezone': timezone,
+      'premium_label': premiumLabel,
+      'disabled_premium': disabledPremium,
+      'diago_link': diagoLink,
+      'invoices_link': invoicesLink,
+      'created_at': createdAt.toIso8601String(),
+      'updated_at': updatedAt.toIso8601String(),
+      'last_activity': lastActivity.toIso8601String(),
+      'contents': contents.map((e) => e.toJson()).toList(),
+      'can_contact': canContact,
+      'teams_count': teamsCount,
+      'can_access_stats_all_periods': canAccessStatsAllPeriods,
+      'can_set_favorite': canSetFavorite,
+      'can_filter_by_equipment': canFilterByEquipment,
+      'can_automatically_update_next_training': canAutomaticallyUpdateNextTraining,
+      'can_create_exercise': canCreateExercise,
+      'can_create_free_training': canCreateFreeTraining,
+      'can_log_activity': canLogActivity,
+      'can_show_customers': canShowCustomers,
+      'can_delete_account': canDeleteAccount,
+      'subscriptions_disabled': subscriptionsDisabled,
+    };
+  }
 }
 
 class AzeooImage {
@@ -287,7 +383,14 @@ class AzeooImage {
   AzeooImage({this.url, this.label});
 
   factory AzeooImage.fromJson(Map<String, dynamic> json) {
-    return AzeooImage(url: json['url'] as String, label: json['label'] as String);
+    return AzeooImage(url: json['url'] as String?, label: json['label'] as String?);
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'url': url,
+      'label': label,
+    };
   }
 }
 
@@ -320,6 +423,16 @@ class Badge {
           .toList(),
     );
   }
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'description': description,
+      'date': date,
+      'count': count,
+      'images': images.map((e) => e.toJson()).toList(),
+    };
+  }
 }
 
 class Skill {
@@ -330,6 +443,13 @@ class Skill {
 
   factory Skill.fromJson(Map<String, dynamic> json) {
     return Skill(id: json['id'] as String, name: json['name'] as String);
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+    };
   }
 }
 
@@ -342,6 +462,13 @@ class Birthday {
   factory Birthday.fromJson(Map<String, dynamic> json) {
     return Birthday(value: json['value'] as String, permission: json['permission'] as String);
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'value': value,
+      'permission': permission,
+    };
+  }
 }
 
 class UserGoal {
@@ -352,6 +479,13 @@ class UserGoal {
 
   factory UserGoal.fromJson(Map<String, dynamic> json) {
     return UserGoal(value: json['value'] as String, permission: json['permission'] as String);
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'value': value,
+      'permission': permission,
+    };
   }
 }
 
@@ -364,6 +498,13 @@ class UserCity {
   factory UserCity.fromJson(Map<String, dynamic> json) {
     return UserCity(value: json['value'] as String, permission: json['permission'] as String);
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'value': value,
+      'permission': permission,
+    };
+  }
 }
 
 class UserLocation {
@@ -375,6 +516,13 @@ class UserLocation {
   factory UserLocation.fromJson(Map<String, dynamic> json) {
     return UserLocation(lng: (json['lng'] as num).toDouble(), lat: (json['lat'] as num).toDouble());
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'lng': lng,
+      'lat': lat,
+    };
+  }
 }
 
 class RecentActivity {
@@ -384,14 +532,21 @@ class RecentActivity {
   RecentActivity({this.date, required this.duration});
 
   factory RecentActivity.fromJson(Map<String, dynamic> json) {
-    return RecentActivity(date: json['date'] as String, duration: json['duration'] as int);
+   return RecentActivity(date: json['date'] as String, duration: json['duration'] as int);
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'date': date,
+      'duration': duration,
+    };
   }
 }
 
 class UserProgramSimplified {
   final int id;
   final String? object;
-  final Program program;
+  final Program? program;
   final ProgramVersion? version;
   final String? startedAt;
   final String? endedAt;
@@ -404,7 +559,7 @@ class UserProgramSimplified {
   UserProgramSimplified({
     required this.id,
     this.object,
-    required this.program,
+    this.program,
     this.version,
     this.startedAt,
     this.endedAt,
@@ -419,8 +574,8 @@ class UserProgramSimplified {
     return UserProgramSimplified(
       id: json['id'] as int,
       object: json['object'] as String,
-      program: Program.fromJson(json['program'] as Map<String, dynamic>),
-      version: ProgramVersion.fromJson(json['version'] as Map<String, dynamic>),
+      program: json['program'] != '' ? Program.fromJson(json['program'] as Map<String, dynamic>) : null,
+      version: json['version'] != '' ? ProgramVersion.fromJson(json['version'] as Map<String, dynamic>) : null,
       startedAt: json['started_at'] as String,
       endedAt: json['ended_at'] as String?,
       state: json['state'] as String,
@@ -429,6 +584,22 @@ class UserProgramSimplified {
       createdAt: json['created_at'] as String,
       updatedAt: json['updated_at'] as String,
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'object': object,
+      'program': program?.toJson(),
+      'version': version?.toJson(),
+      'started_at': startedAt,
+      'ended_at': endedAt,
+      'state': state,
+      'achievement': achievement,
+      'achievement_days': achievementDays,
+      'created_at': createdAt,
+      'updated_at': updatedAt,
+    };
   }
 }
 
@@ -447,9 +618,9 @@ class Program {
   final dynamic subscriptionsInfo;
   final dynamic totalDays;
   final int totalWeeks;
-  final ProgramAuthor author;
+  final ProgramAuthor? author;
   final String? type;
-  final List<AzeooImage> images;
+  final List<AzeooImage>? images;
   final String? nameFr; // Optional
   final String? captionFr; // Optional
 
@@ -468,9 +639,9 @@ class Program {
     this.subscriptionsInfo,
     this.totalDays,
     required  this.totalWeeks,
-    required   this.author,
+    this.author,
     this.type,
-    required this.images,
+    this.images,
     this.nameFr,
     this.captionFr,
   });
@@ -478,12 +649,12 @@ class Program {
   factory Program.fromJson(Map<String, dynamic> json) {
     return Program(
       id: json['id'] as int,
-      name: json['name'] as String,
+      name: json['name'] as String?,
       caption: json['caption'],
       isDeleted: json['is_deleted'],
       isFavorite: json['is_favorite'],
       canFavorite: json['can_favorite'] as bool,
-      url: json['url'] as String,
+      url: json['url'] as String?,
       purchase: json['purchase'],
       purchaseV2: json['purchase_v2'],
       isPremium: json['is_premium'] as bool,
@@ -492,13 +663,37 @@ class Program {
       totalDays: json['total_days'],
       totalWeeks: json['total_weeks'] as int,
       author: ProgramAuthor.fromJson(json['author'] as Map<String, dynamic>),
-      type: json['type'] as String,
+      type: json['type'] as String?,
       images: (json['images'] as List<dynamic>)
           .map((e) => AzeooImage.fromJson(e as Map<String, dynamic>))
           .toList(),
       nameFr: json['name_fr'] as String?,
       captionFr: json['caption_fr'] as String?,
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'caption': caption,
+      'is_deleted': isDeleted,
+      'is_favorite': isFavorite,
+      'can_favorite': canFavorite,
+      'url': url,
+      'purchase': purchase,
+      'purchase_v2': purchaseV2,
+      'is_premium': isPremium,
+      'need_subscription': needSubscription,
+      'subscriptions_info': subscriptionsInfo,
+      'total_days': totalDays,
+      'total_weeks': totalWeeks,
+      'author': author?.toJson(),
+      'type': type,
+      'images': images?.map((e) => e.toJson()).toList(),
+      'name_fr': nameFr,
+      'caption_fr': captionFr,
+    };
   }
 }
 
@@ -534,6 +729,18 @@ class ProgramAuthor {
         type: json['type'] as String?
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'is_ghost': isGhost,
+      'is_manager': isManager,
+      'is_coach': isCoach,
+      'photos': photos?.map((e) => e.toJson()).toList(),
+      'type': type,
+    };
+  }
 }
 
 class ProgramVersion {
@@ -544,6 +751,13 @@ class ProgramVersion {
 
   factory ProgramVersion.fromJson(Map<String, dynamic> json) {
     return ProgramVersion(id: json['id'] as int, name: json['name'] as String);
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+    };
   }
 }
 
@@ -696,6 +910,57 @@ class ClubSimplified {
       coachs: json['coachs'],
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'object': object,
+      'parent_id': parentId,
+      'member_id': memberId,
+      'has_member_id': hasMemberId,
+      'name': name,
+      'short_name': shortName,
+      'url': url,
+      'city': city,
+      'country_code': countryCode,
+      'country_flag': countryFlag,
+      'formatted_address': formattedAddress,
+      'distance': distance,
+      'membership_state': membershipState,
+      'connector_type': connectorType,
+      'history_enabled': historyEnabled,
+      'connector': connector,
+      'qrcode_enabled': qrcodeEnabled,
+      'qrcode_type': qrcodeType,
+      'qrcode_url': qrcodeUrl,
+      'booking': booking,
+      'booking_url': bookingUrl,
+      'has_video_classes': hasVideoClasses,
+      'zfitness_enabled': zfitnessEnabled,
+      'lesmills_enabled': lesmillsEnabled,
+      'chat_enabled': chatEnabled,
+      'max_athlete': maxAthlete,
+      'booking_enabled': bookingEnabled,
+      'bookings_count': bookingsCount,
+      'diago_link_enabled': diagoLinkEnabled,
+      'invoices_link_enabled': invoicesLinkEnabled,
+      'external_products_enabled': externalProductsEnabled,
+      'is_ghost': isGhost,
+      'white_label': whiteLabel,
+      'stripe_enabled': stripeEnabled,
+      'shopify_enabled': shopifyEnabled,
+      'nutrition_plan_additionnal_data_enabled': nutritionPlanAdditionnalDataEnabled,
+      'timezone': timezone,
+      'is_member': isMember,
+      'is_manager': isManager,
+      'is_coach': isCoach,
+      'type': type,
+      'account_type': accountType,
+      'photos': photos.map((e) => e.toJson()).toList(),
+      'subscriptions': subscriptions,
+      'coachs': coachs,
+    };
+  }
 }
 
 class Contacts {
@@ -737,6 +1002,21 @@ class Contacts {
       phone: json['phone'],
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'twitter': twitter,
+      'facebook': facebook,
+      'instagram': instagram,
+      'pinterest': pinterest,
+      'tiktok': tiktok,
+      'snapchat': snapchat,
+      'youtube': youtube,
+      'website': website,
+      'email': email,
+      'phone': phone,
+    };
+  }
 }
 
 class SetupFields {
@@ -765,6 +1045,17 @@ class SetupFields {
       level: json['level'] as bool,
       goal: json['goal'] as bool,
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'password': password,
+      'club_id': clubId,
+      'birthday': birthday,
+      'gender': gender,
+      'level': level,
+      'goal': goal,
+    };
   }
 }
 
@@ -808,6 +1099,21 @@ class Subscription {
         isTrial: json['is_trial'] as bool?
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'name': name,
+      'sku': sku,
+      'can_cancel': canCancel,
+      'type': type,
+      'status': status,
+      'user_id': userId,
+      'started_at': startedAt,
+      'canceled_at': canceledAt,
+      'ended_at': endedAt,
+      'is_trial': isTrial,
+    };
+  }
 }
 
 class WhiteLabel {
@@ -818,6 +1124,13 @@ class WhiteLabel {
 
   factory WhiteLabel.fromJson(Map<String, dynamic> json) {
     return WhiteLabel(id: json['id'] as int, key: json['key'] as String);
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'key': key,
+    };
   }
 }
 
@@ -844,6 +1157,16 @@ class Content {
       type: json['type'] as String,
       items: json['items'] as List<dynamic>, // Handle with care
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'name': name,
+      'caption': caption,
+      'url': url,
+      'type': type,
+      'items': items,
+    };
   }
 }
 
@@ -883,6 +1206,20 @@ class UserNutritionPlanSimplified {
       createdAt: json['created_at'] as String,
       updatedAt: json['updated_at'] as String?,
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'object': object,
+      'url': url,
+      'nutrition_plan': nutritionPlan?.toJson(),
+      'started_at': startedAt,
+      'ended_at': endedAt,
+      'state': state,
+      'created_at': createdAt,
+      'updated_at': updatedAt,
+    };
   }
 }
 
@@ -935,6 +1272,24 @@ class NutritionPlan {
           .map((e) => AzeooImage.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'is_favorite': isFavorite,
+      'can_favorite': canFavorite,
+      'url': url,
+      'purchase_v2': purchaseV2,
+      'is_premium': isPremium,
+      'need_subscription': needSubscription,
+      'subscriptions_info': subscriptionsInfo,
+      'total_days': totalDays,
+      'total_weeks': totalWeeks,
+      'author': author?.toJson(),
+      'images': images?.map((e) => e.toJson()).toList(),
+    };
   }
 }
 
@@ -995,6 +1350,27 @@ class FormSimplified {
       userNutritionPlan: json['user_nutrition_plan'],
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'share': share,
+      'url': url,
+      'name': name,
+      'images': images,
+      'author': author?.toJson(),
+      'coach': coach?.toJson(),
+      'state': state,
+      'steps_count': stepsCount,
+      'date': date,
+      'response_date': responseDate,
+      'created_at': createdAt,
+      'training_id': trainingId,
+      'nutrition_plan': nutritionPlan,
+      'user_program': userProgram,
+      'user_nutrition_plan': userNutritionPlan,
+    };
+  }
 }
 
 class Coach {
@@ -1034,6 +1410,20 @@ class Coach {
       gender: json['gender'] as String,
       type: json['type'] as String,
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'first_name': firstName,
+      'last_name': lastName,
+      'picture': picture?.map((e) => e.toJson()).toList(),
+      'account_type': accountType,
+      'is_following': isFollowing,
+      'coach_attachment_state': coachAttachmentState,
+      'gender': gender,
+      'type': type,
+    };
   }
 }
 
