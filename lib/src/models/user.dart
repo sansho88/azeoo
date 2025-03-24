@@ -300,12 +300,12 @@ class Badge {
   final List<AzeooImage> images;
 
   Badge({
-    this.id,
+    required this.id,
     this.name,
     this.description,
     this.date,
-    this.count,
-    this.images,
+    required  this.count,
+    required this.images,
   });
 
   factory Badge.fromJson(Map<String, dynamic> json) {
@@ -381,7 +381,7 @@ class RecentActivity {
   final String? date;
   final int duration;
 
-  RecentActivity({this.date, this.duration});
+  RecentActivity({this.date, required this.duration});
 
   factory RecentActivity.fromJson(Map<String, dynamic> json) {
     return RecentActivity(date: json['date'] as String, duration: json['duration'] as int);
@@ -392,7 +392,7 @@ class UserProgramSimplified {
   final int id;
   final String? object;
   final Program program;
-  final ProgramVersion version;
+  final ProgramVersion? version;
   final String? startedAt;
   final String? endedAt;
   final String? state;
@@ -404,12 +404,12 @@ class UserProgramSimplified {
   UserProgramSimplified({
     required this.id,
     this.object,
-    this.program,
+    required this.program,
     this.version,
     this.startedAt,
     this.endedAt,
     this.state,
-    this.achievement,
+    required this.achievement,
     this.achievementDays,
     this.createdAt,
     this.updatedAt,
@@ -454,23 +454,23 @@ class Program {
   final String? captionFr; // Optional
 
   Program({
-    this.id,
+    required this.id,
     this.name,
     this.caption,
     this.isDeleted,
     this.isFavorite,
-    this.canFavorite,
+    required  this.canFavorite,
     this.url,
     this.purchase,
     this.purchaseV2,
-    this.isPremium,
-    this.needSubscription,
+    required  this.isPremium,
+    required  this.needSubscription,
     this.subscriptionsInfo,
     this.totalDays,
-    this.totalWeeks,
-    this.author,
+    required  this.totalWeeks,
+    required   this.author,
     this.type,
-    this.images,
+    required this.images,
     this.nameFr,
     this.captionFr,
   });
@@ -505,14 +505,14 @@ class Program {
 class ProgramAuthor {
   final int id;
   final String? name;
-  final bool isGhost;
-  final bool isManager;
-  final bool isCoach;
-  final List<AzeooImage> photos;
+  final bool? isGhost;
+  final bool? isManager;
+  final bool? isCoach;
+  final List<AzeooImage>? photos;
   final String? type; // Can be null
 
   ProgramAuthor({
-    this.id,
+    required this.id,
     this.name,
     this.isGhost,
     this.isManager,
@@ -540,7 +540,7 @@ class ProgramVersion {
   final int id;
   final String? name;
 
-  ProgramVersion({this.id, this.name});
+  ProgramVersion({required this.id, this.name});
 
   factory ProgramVersion.fromJson(Map<String, dynamic> json) {
     return ProgramVersion(id: json['id'] as int, name: json['name'] as String);
@@ -740,12 +740,12 @@ class Contacts {
 }
 
 class SetupFields {
-  final bool password;
-  final bool clubId;
-  final bool birthday;
-  final bool gender;
-  final bool level;
-  final bool goal;
+  final bool? password;
+  final bool? clubId;
+  final bool? birthday;
+  final bool? gender;
+  final bool? level;
+  final bool? goal;
 
   SetupFields({
     this.password,
@@ -771,7 +771,7 @@ class SetupFields {
 class Subscription {
   final String? name;
   final String? sku;
-  final bool canCancel;
+  final bool? canCancel;
   final String? type;
   final int? status;
   final int? userId;
@@ -814,7 +814,7 @@ class WhiteLabel {
   final int id;
   final String? key;
 
-  WhiteLabel({this.id, this.key});
+  WhiteLabel({required this.id, this.key});
 
   factory WhiteLabel.fromJson(Map<String, dynamic> json) {
     return WhiteLabel(id: json['id'] as int, key: json['key'] as String);
@@ -826,7 +826,7 @@ class Content {
   final dynamic caption;
   final String? url;
   final String? type;
-  final List<dynamic> items; // Mixed list
+  final List<dynamic>? items; // Mixed list
 
   Content({
     this.name,
@@ -852,7 +852,7 @@ class UserNutritionPlanSimplified {
   final int id;
   final String? object;
   final String? url;
-  final NutritionPlan nutritionPlan;
+  final NutritionPlan? nutritionPlan;
   final String? startedAt;
   final String? endedAt;
   final String? state;
@@ -860,7 +860,7 @@ class UserNutritionPlanSimplified {
   final String? updatedAt;
 
   UserNutritionPlanSimplified({
-    this.id,
+    required this.id,
     this.object,
     this.url,
     this.nutritionPlan,
@@ -890,19 +890,19 @@ class NutritionPlan {
   final int id;
   final String? name;
   final dynamic isFavorite;
-  final bool canFavorite;
+  final bool? canFavorite;
   final String? url;
   final dynamic purchaseV2;
-  final bool isPremium;
-  final bool needSubscription;
+  final bool? isPremium;
+  final bool? needSubscription;
   final dynamic subscriptionsInfo;
   final dynamic totalDays;
-  final int totalWeeks;
-  final ProgramAuthor author;
-  final List<AzeooImage> images;
+  final int? totalWeeks;
+  final ProgramAuthor? author;
+  final List<AzeooImage>? images;
 
   NutritionPlan({
-    this.id,
+    required this.id,
     this.name,
     this.isFavorite,
     this.canFavorite,
@@ -944,10 +944,10 @@ class FormSimplified {
   final String? url;
   final String? name;
   final dynamic images; // Can be null
-  final ProgramAuthor author;
-  final Coach coach;
+  final ProgramAuthor? author;
+  final Coach? coach;
   final String? state;
-  final int stepsCount;
+  final int? stepsCount;
   final dynamic date; // Can be null
   final dynamic responseDate; // Can be null
   final String? createdAt;
@@ -957,7 +957,7 @@ class FormSimplified {
   final dynamic userNutritionPlan; // Can be null
 
   FormSimplified({
-    this.id,
+    required this.id,
     this.share,
     this.url,
     this.name,
@@ -1001,9 +1001,9 @@ class Coach {
   final int id;
   final String? firstName;
   final String? lastName;
-  final List<AzeooImage> picture;
+  final List<AzeooImage>? picture;
   final String? accountType;
-  final bool isFollowing;
+  final bool? isFollowing;
   final dynamic coachAttachmentState;
   final String? gender;
   final String? type;
